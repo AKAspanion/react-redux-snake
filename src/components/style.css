@@ -24,7 +24,7 @@ body {
     display: grid;
     grid-template-columns: repeat(20, 1fr);
     grid-template-rows: repeat(20, 1fr);
-    background-color: #333
+    background-color: #222
 }
 
 .cell {
@@ -40,16 +40,15 @@ body {
 }
 
 .head{
-    background: rgb(122, 3, 3);   
+    border-radius: 20%;
+    background: rgb(250, 0, 0);   
+    box-shadow: 0px 0px 30px 1px rgb(236, 53, 53);
 }
 .tail{    
-    background: rgb(233, 54, 54);
-    transform: scale(0.8);  
-}
-
-.head, .tail {
-    border-radius: 20%;   
-    box-shadow: 0px 0px 20px 2px rgb(235, 70, 70);
+    border-radius: 30%;
+    background: rgb(230, 121, 20);
+    box-shadow: 0px 0px 20px 2px rgb(214, 70, 70);
+    transform: scale(0.9);  
 }
 
 .center{
