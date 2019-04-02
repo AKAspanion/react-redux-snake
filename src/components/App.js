@@ -58,18 +58,20 @@ class App extends Component {
             newHead
         })
         
+         //move over condition
+        this.moveOnEdge()
+
         // updating apple and tail
         let newTail = [snake.head, ...snake.tail]
-        let newApple = apple
         const isEat = this.snakeEatsApple()
 
-        if(isEat){
+        if(isEat){            
             this.playEatAudio().then(() =>{
-                console.log('ate')
+                console.log('play')
             }).catch((e)=>{
                 console.log(e)
             })
-            newApple = this.getRandomApple()
+            const newApple = this.getRandomApple()
             this.props.createApple({
                 newApple
             })
@@ -80,9 +82,6 @@ class App extends Component {
             newTail
         })
 
-        //move over condition
-        this.moveOnEdge()
-        
         //game over condition
         if(this.isTail(this.props.snake.head)){
             this.props.setGameOver({
@@ -101,8 +100,8 @@ class App extends Component {
         if(this.isOffEdge(snake.head)){
             if(snake.head.col>GRID_SIZE-1){
                 const newHead = {
-                    row: snake.head.row + snake.velocity.y,
-                    col: -1 + snake.velocity.x
+                    row: snake.head.row,
+                    col: 0
                 }                
                 this.props.updateSnakeHead({
                     newHead
@@ -110,8 +109,8 @@ class App extends Component {
             }
             else if(snake.head.col<0){
                 const newHead = {
-                    row: snake.head.row + snake.velocity.y,
-                    col: GRID_SIZE + snake.velocity.x
+                    row: snake.head.row,
+                    col: GRID_SIZE-1
                 }                
                 this.props.updateSnakeHead({
                     newHead
@@ -119,16 +118,16 @@ class App extends Component {
             }
             else if(snake.head.row<0){
                 const newHead = {
-                    row: GRID_SIZE + snake.velocity.y,
-                    col: snake.head.col + snake.velocity.x
+                    row: GRID_SIZE-1,
+                    col: snake.head.col
                 }                
                 this.props.updateSnakeHead({
                     newHead
                 })
             }else if(snake.head.row>GRID_SIZE-1){
                 const newHead = {
-                    row: -1 + snake.velocity.y,
-                    col: snake.head.col + snake.velocity.x
+                    row: 0,
+                    col: snake.head.col
                 }                
                 this.props.updateSnakeHead({
                     newHead
@@ -151,7 +150,9 @@ class App extends Component {
     }
 
     snakeEatsApple = () => {
+        
         const { apple, snake } = this.props;
+        
         return apple.row === snake.head.row
             && apple.col === snake.head.col;
     }
