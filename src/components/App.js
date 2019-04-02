@@ -50,14 +50,14 @@ class App extends Component {
         let newApple = apple
         if(isEat){
             newApple = this.getRandomApple()
+            this.props.createApple({
+                newApple
+            })
         }else{
             newTail.pop()
         }
-
+        
         //updating redux state
-        this.props.createApple({
-            newApple
-        })
         this.props.updateSnakeHead({
             newHead
         })
