@@ -16,13 +16,18 @@ import {
     KEY_DOWN, KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_ENTER} from '../actions/types';
 
 import './style.css'
+import EatSound from '../assets/EatSound.ogg'
 
 class App extends Component {
+    
+    eatAudio = new Audio(EatSound)
 
-    componentDidMount = () =>{     
+    componentDidMount = () =>{ 
         this.start()
     }
-
+    playEatAudio = () =>{
+        return this.eatAudio.play()
+    }
     start = () =>{
         this.props.reset({
             state: INITIAL_STATE
@@ -36,6 +41,7 @@ class App extends Component {
     }
 
     gameLoop = () =>{
+        
         //if game is over exit game loop
         if (this.props.gameOver) 
             return;
@@ -58,6 +64,11 @@ class App extends Component {
         const isEat = this.snakeEatsApple()
 
         if(isEat){
+            this.playEatAudio().then(() =>{
+                console.log('ate')
+            }).catch((e)=>{
+                console.log(e)
+            })
             newApple = this.getRandomApple()
             this.props.createApple({
                 newApple
@@ -216,6 +227,7 @@ class App extends Component {
     
     renderGrid = () =>{        
         const { grid, snake } = this.props;
+        
         return(
             <div className="center">
                 <h3 className="score">Score: {snake.tail.length-2}</h3>
