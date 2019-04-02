@@ -9,6 +9,7 @@ import {
     updateSnakeHead, 
     updateSnakeVelocity} from '../actions'
 import {
+    GRID_SIZE,
     GAME_SPEED,
     INITIAL_STATE,
     UP, DOWN, LEFT, RIGHT, 
@@ -87,7 +88,7 @@ class App extends Component {
     moveOnEdge = () =>{
         const {snake} = this.props
         if(this.isOffEdge(snake.head)){
-            if(snake.head.col>19){
+            if(snake.head.col>GRID_SIZE-1){
                 const newHead = {
                     row: snake.head.row + snake.velocity.y,
                     col: -1 + snake.velocity.x
@@ -99,7 +100,7 @@ class App extends Component {
             else if(snake.head.col<0){
                 const newHead = {
                     row: snake.head.row + snake.velocity.y,
-                    col: 20 + snake.velocity.x
+                    col: GRID_SIZE + snake.velocity.x
                 }                
                 this.props.updateSnakeHead({
                     newHead
@@ -107,13 +108,13 @@ class App extends Component {
             }
             else if(snake.head.row<0){
                 const newHead = {
-                    row: 20 + snake.velocity.y,
+                    row: GRID_SIZE + snake.velocity.y,
                     col: snake.head.col + snake.velocity.x
                 }                
                 this.props.updateSnakeHead({
                     newHead
                 })
-            }else if(snake.head.row>19){
+            }else if(snake.head.row>GRID_SIZE-1){
                 const newHead = {
                     row: -1 + snake.velocity.y,
                     col: snake.head.col + snake.velocity.x
@@ -146,9 +147,9 @@ class App extends Component {
 
     isOffEdge = () => {
         const { snake } = this.props;    
-        if (snake.head.col > 19
+        if (snake.head.col > GRID_SIZE-1
             || snake.head.col < 0
-            || snake.head.row > 19
+            || snake.head.row > GRID_SIZE-1
             || snake.head.row < 0) {
             return true;
         }
@@ -214,11 +215,17 @@ class App extends Component {
         return(
             <div className="center">
                 <h3 className="score">Score: {snake.tail.length-2}</h3>
-                <section className="grid">
+                <section 
+                    className="grid"
+                    style={{
+                        gridTemplateColumns: `repeat(${GRID_SIZE}, 1fr)`, 
+                        gridTemplateRows: `repeat(${GRID_SIZE}, 1fr)`
+                    }}>
                 {
                     grid.map((row) => (
                         row.map(cell => (
                         <div key={`${cell.row} ${cell.col}`} 
+                            style={{ width: `${800/GRID_SIZE}`, height: `${800/GRID_SIZE}`}}
                             className={`cell ${this.isHead(cell)
                             ? 'head' : this.isApple(cell)
                             ? 'apple' : this.isTail(cell)

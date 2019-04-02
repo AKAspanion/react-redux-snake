@@ -13,6 +13,7 @@ export const KEY_RIGHT = 39
 export const KEY_DOWN = 40
 
 export const GAME_SPEED = 100
+export const GRID_SIZE = 20
 
 export const UP = {
     x: 0,
@@ -32,10 +33,10 @@ export const RIGHT = {
 }
 
 export const INITIAL_STATE = {
-    grid: createGrid(20),
+    grid: createGrid(GRID_SIZE),
     apple: {
-        row: Math.floor(Math.random() * 20),
-        col: Math.floor(Math.random() * 20),
+        row: Math.floor(Math.random() * GRID_SIZE),
+        col: Math.floor(Math.random() * GRID_SIZE),
     },
     snake: {
         head: {

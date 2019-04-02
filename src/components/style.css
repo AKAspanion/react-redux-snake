@@ -1,3 +1,4 @@
+
 body {
     width: 100vw;
     height: 100vh;
@@ -22,14 +23,10 @@ body {
     width: 800px;
     height: 800px;
     display: grid;
-    grid-template-columns: repeat(20, 1fr);
-    grid-template-rows: repeat(20, 1fr);
     background-color: #222
 }
 
 .cell {
-    width: 40px;
-    height: 40px;
     display: inline-block;
 }
 
