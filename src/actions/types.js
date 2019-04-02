@@ -12,7 +12,7 @@ export const KEY_UP = 38
 export const KEY_RIGHT = 39
 export const KEY_DOWN = 40
 
-export const GAME_SPEED = 200
+export const GAME_SPEED = 100
 
 export const UP = {
     x: 0,

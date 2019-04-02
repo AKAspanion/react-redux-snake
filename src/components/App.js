@@ -65,17 +65,61 @@ class App extends Component {
             newTail
         })
 
+        //move over condition
+        this.checkOnEdge()
+        
         //game over condition
-        if (this.isOffEdge() || this.isTail(this.props.snake.head)) {
+        if(this.isTail(this.props.snake.head)){
             this.props.setGameOver({
                 flag: true
             })
-            return
         }
+
         //restart loop after defined time
         setTimeout(() => {
             this.gameLoop()
         }, GAME_SPEED)
+    }
+
+    checkOnEdge = () =>{
+        const {snake} = this.props
+        if(this.isOffEdge(snake.head)){
+            if(snake.head.col>19){
+                const newHead = {
+                    row: snake.head.row + snake.velocity.y,
+                    col: -1 + snake.velocity.x
+                }                
+                this.props.updateSnakeHead({
+                    newHead
+                })
+            }
+            else if(snake.head.col<0){
+                const newHead = {
+                    row: snake.head.row + snake.velocity.y,
+                    col: 20 + snake.velocity.x
+                }                
+                this.props.updateSnakeHead({
+                    newHead
+                })
+            }
+            else if(snake.head.row<0){
+                const newHead = {
+                    row: 20 + snake.velocity.y,
+                    col: snake.head.col + snake.velocity.x
+                }                
+                this.props.updateSnakeHead({
+                    newHead
+                })
+            }else if(snake.head.row>19){
+                const newHead = {
+                    row: -1 + snake.velocity.y,
+                    col: snake.head.col + snake.velocity.x
+                }                
+                this.props.updateSnakeHead({
+                    newHead
+                })
+            }
+        }
     }
 
     getRandomApple = () =>{
@@ -127,23 +171,32 @@ class App extends Component {
     }
 
     moveSnake = (event) => {
+        const {snake} = this.props
         switch(event.keyCode){
             case KEY_UP:
+                if(snake.velocity === UP || snake.velocity === DOWN)
+                    return
                 this.props.updateSnakeVelocity({                    
                     newVelocity: UP
                 })
                 return
             case KEY_LEFT:
+                if(snake.velocity === LEFT || snake.velocity === RIGHT)
+                    return
                 this.props.updateSnakeVelocity({                    
                     newVelocity: LEFT
                 })
                 return
             case KEY_DOWN:
+                if(snake.velocity === UP || snake.velocity === DOWN)
+                    return
                 this.props.updateSnakeVelocity({                    
                     newVelocity: DOWN
                 })
                 return
             case KEY_RIGHT:
+                if(snake.velocity === LEFT || snake.velocity === RIGHT)
+                    return
                 this.props.updateSnakeVelocity({                    
                     newVelocity: RIGHT
                 })
@@ -157,7 +210,7 @@ class App extends Component {
         const { grid, snake } = this.props;
         return(
             <div className="center">
-                <h2>Score: {snake.tail.length-2}</h2>
+                <h3 className="score">Score: {snake.tail.length-2}</h3>
                 <section className="grid">
                 {
                     grid.map((row) => (
@@ -181,7 +234,7 @@ class App extends Component {
         return(
             <div className="card text-center">
                 <div className="card-body">
-                    <h1 className="card-title">Game Over!!</h1>
+                    <h1 className="card-title">You bit yourself!!</h1>
                     <p className="card-text">Your Score is: {this.props.snake.tail.length-2}</p>
                     <button className="btn btn-primary" onClick={this.start}>
                         Restart
