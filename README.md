@@ -1,1 +1,1 @@
-Run htpps://AKAspanion.github.io/react-redux-snake
+Run https://akaspanion.github.io/react-redux-snake/
