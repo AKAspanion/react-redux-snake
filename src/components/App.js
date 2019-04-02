@@ -47,7 +47,7 @@ class App extends Component {
             return;
         
         //extracting data from props to change state
-        const {snake, apple} = this.props
+        const {snake} = this.props
 
         // updating head
         const newHead = {
