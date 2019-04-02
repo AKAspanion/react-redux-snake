@@ -43,7 +43,8 @@ body {
     background: rgb(122, 3, 3);   
 }
 .tail{    
-    background: rgb(233, 54, 54);   
+    background: rgb(233, 54, 54);
+    transform: scale(0.8);  
 }
 
 .head, .tail {
