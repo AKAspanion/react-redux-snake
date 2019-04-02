@@ -1,1 +1,1 @@
-Run https://akaspanion.github.io/react-redux-snake/
+https://akaspanion.github.io/react-redux-snake/
