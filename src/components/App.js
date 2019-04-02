@@ -13,7 +13,7 @@ import {
     GAME_SPEED,
     INITIAL_STATE,
     UP, DOWN, LEFT, RIGHT, 
-    KEY_DOWN, KEY_LEFT, KEY_RIGHT, KEY_UP} from '../actions/types';
+    KEY_DOWN, KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_ENTER} from '../actions/types';
 
 import './style.css'
 
@@ -131,7 +131,7 @@ class App extends Component {
         const emptyCells = []
         grid.forEach((row) =>{
             row.forEach((cell) =>{
-                if(!this.isTail(cell) || !this.isHead(cell)){
+                if(!(this.isTail(cell) || this.isHead(cell))){
                     emptyCells.push(cell)
                 }
             })
@@ -204,6 +204,10 @@ class App extends Component {
                 this.props.updateSnakeVelocity({                    
                     newVelocity: RIGHT
                 })
+                return
+            case KEY_ENTER:
+                if(this.props.gameOver)
+                    this.start()
                 return
             default:
                 return

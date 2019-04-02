@@ -23,6 +23,7 @@ body {
     width: 800px;
     height: 800px;
     display: grid;
+    border: 5px solid #000;
     background-color: #222
 }
 
