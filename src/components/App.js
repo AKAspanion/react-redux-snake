@@ -41,13 +41,21 @@ class App extends Component {
         
         //extracting data from props to change state
         const {snake, apple} = this.props
-        const isEat = this.snakeEatsApple()
+
+        // updating head
         const newHead = {
             row: snake.head.row + snake.velocity.y,
             col: snake.head.col + snake.velocity.x
-        }        
+        }
+        this.props.updateSnakeHead({
+            newHead
+        })
+        
+        // updating apple and tail
         let newTail = [snake.head, ...snake.tail]
         let newApple = apple
+        const isEat = this.snakeEatsApple()
+
         if(isEat){
             newApple = this.getRandomApple()
             this.props.createApple({
@@ -55,18 +63,13 @@ class App extends Component {
             })
         }else{
             newTail.pop()
-        }
-        
-        //updating redux state
-        this.props.updateSnakeHead({
-            newHead
-        })
+        }        
         this.props.updateSnakeTail({
             newTail
         })
 
         //move over condition
-        this.checkOnEdge()
+        this.moveOnEdge()
         
         //game over condition
         if(this.isTail(this.props.snake.head)){
@@ -81,7 +84,7 @@ class App extends Component {
         }, GAME_SPEED)
     }
 
-    checkOnEdge = () =>{
+    moveOnEdge = () =>{
         const {snake} = this.props
         if(this.isOffEdge(snake.head)){
             if(snake.head.col>19){
