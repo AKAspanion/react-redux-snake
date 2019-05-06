@@ -57,3 +57,6 @@ body {
     color: #fff;
     padding: 5px;
 }
+.eating{
+    transform: scale(2)
+}

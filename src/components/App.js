@@ -12,6 +12,7 @@ import {
     GRID_SIZE,
     GAME_SPEED,
     INITIAL_STATE,
+    LOCAL_STORAGE_KEY,
     UP, DOWN, LEFT, RIGHT, 
     KEY_DOWN, KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_ENTER} from '../actions/types';
 
@@ -41,7 +42,6 @@ class App extends Component {
     }
 
     gameLoop = () =>{
-        
         //if game is over exit game loop
         if (this.props.gameOver) 
             return;
@@ -67,7 +67,7 @@ class App extends Component {
 
         if(isEat){            
             this.playEatAudio().then(() =>{
-                console.log('play')
+                console.log('ate')
             }).catch((e)=>{
                 console.log(e)
             })
@@ -83,7 +83,8 @@ class App extends Component {
         })
 
         //game over condition
-        if(this.isTail(this.props.snake.head)){
+        if(this.isGameOver()){
+            this.updateHigh();
             this.props.setGameOver({
                 flag: true
             })
@@ -157,6 +158,22 @@ class App extends Component {
             && apple.col === snake.head.col;
     }
 
+    isEating = () =>{
+        if(this.snakeEatsApple()){
+            
+        console.log('here')
+            return 'eating'
+        }
+        return ''
+    }
+
+    isGameOver = () =>{
+        if(this.isTail(this.props.snake.head)){
+            return true;
+        }
+        return false;
+    }
+
     isOffEdge = () => {
         const { snake } = this.props;    
         if (snake.head.col > GRID_SIZE-1
@@ -186,6 +203,16 @@ class App extends Component {
         })
     }
 
+    getHigh = () =>{
+        return localStorage.getItem(LOCAL_STORAGE_KEY);
+    }
+
+    updateHigh = () =>{
+        const {snake} = this.props;
+        if(this.getHigh() === null || this.getHigh() < snake.tail.length-2){
+            localStorage.setItem(LOCAL_STORAGE_KEY, snake.tail.length-2)
+        }
+    }
     moveSnake = (event) => {
         const {snake} = this.props
         switch(event.keyCode){
@@ -231,7 +258,7 @@ class App extends Component {
         
         return(
             <div className="center">
-                <h3 className="score">Score: {snake.tail.length-2}</h3>
+                <h3 className="score">Your Current Score: {snake.tail.length-2} || Your Highest Score: {this.getHigh() || 0}</h3>
                 <section 
                     className="grid"
                     style={{
@@ -244,7 +271,8 @@ class App extends Component {
                         <div key={`${cell.row} ${cell.col}`} 
                             style={{ width: `${800/GRID_SIZE}`, height: `${800/GRID_SIZE}`}}
                             className={`cell ${this.isHead(cell)
-                            ? 'head' : this.isApple(cell)
+                            ? 'head' : this.snakeEatsApple(cell)
+                            ? 'eating' : this.isApple(cell)
                             ? 'apple' : this.isTail(cell)
                             ? 'tail' : ''}`
                             }>

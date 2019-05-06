@@ -6,6 +6,7 @@ export const UPDATE_HEAD = 'UPDATE_HEAD'
 export const UPDATE_TAIL = 'UPDATE_TAIL'
 export const UPDATE_VELOCITY = 'UPDATE_VELOCITY'
 export const GAME_OVER = 'GAME_OVER'
+export const LOCAL_STORAGE_KEY = 'snake_redux_high'
 
 export const KEY_LEFT = 37
 export const KEY_UP = 38
@@ -45,10 +46,7 @@ export const INITIAL_STATE = {
             row: 9,
             col: 9
         },
-        velocity: {
-            x: 1,
-            y: 0
-        },
+        velocity: RIGHT,
         tail: [
             {
                 row: 9,
