@@ -16,7 +16,7 @@ export const KEY_ENTER = 13
 
 // change size to make grid big or small
 export const GRID_SIZE = 20
-export const GAME_SPEED = 100
+export const GAME_SPEED = 80
 
 export const UP = {
     x: 0,
