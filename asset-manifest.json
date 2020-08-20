@@ -1,14 +1,14 @@
 {
-  "main.css": "/react-redux-snake/static/css/main.ff594de2.chunk.css",
-  "main.js": "/react-redux-snake/static/js/main.d86a6a12.chunk.js",
-  "main.js.map": "/react-redux-snake/static/js/main.d86a6a12.chunk.js.map",
+  "main.css": "/react-redux-snake/static/css/main.93eb5a12.chunk.css",
+  "main.js": "/react-redux-snake/static/js/main.676b364c.chunk.js",
+  "main.js.map": "/react-redux-snake/static/js/main.676b364c.chunk.js.map",
   "runtime~main.js": "/react-redux-snake/static/js/runtime~main.e34728d2.js",
   "runtime~main.js.map": "/react-redux-snake/static/js/runtime~main.e34728d2.js.map",
-  "static/js/2.7785f07f.chunk.js": "/react-redux-snake/static/js/2.7785f07f.chunk.js",
-  "static/js/2.7785f07f.chunk.js.map": "/react-redux-snake/static/js/2.7785f07f.chunk.js.map",
+  "static/js/2.05c6d9bc.chunk.js": "/react-redux-snake/static/js/2.05c6d9bc.chunk.js",
+  "static/js/2.05c6d9bc.chunk.js.map": "/react-redux-snake/static/js/2.05c6d9bc.chunk.js.map",
   "index.html": "/react-redux-snake/index.html",
-  "precache-manifest.cf8b783e78339c3f8188813911479cf8.js": "/react-redux-snake/precache-manifest.cf8b783e78339c3f8188813911479cf8.js",
+  "precache-manifest.7bec898089467d0b5da461bf404d375f.js": "/react-redux-snake/precache-manifest.7bec898089467d0b5da461bf404d375f.js",
   "service-worker.js": "/react-redux-snake/service-worker.js",
-  "static/css/main.ff594de2.chunk.css.map": "/react-redux-snake/static/css/main.ff594de2.chunk.css.map",
+  "static/css/main.93eb5a12.chunk.css.map": "/react-redux-snake/static/css/main.93eb5a12.chunk.css.map",
   "static/media/EatSound.ogg": "/react-redux-snake/static/media/EatSound.1aae80ce.ogg"
 }
